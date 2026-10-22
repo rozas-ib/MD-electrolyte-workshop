@@ -1,17 +1,15 @@
-title                   = OPLS Li-TFSI in PEO
-;define                  = -DPOSRES  ; position restrain the protein
+title                   = Li-FSI in DME
 ; Run parameters
-integrator              = md-vv     ; integrator
-nsteps                  = 500000    ; 2 * 100000000 = 200000 ps
+integrator              = md        ; leap-frog integrator
+nsteps                  = 50000    ; 2 * 150000 = 300 ps
 dt                      = 0.002     ; 2 fs
 ; Output control
-nstxout                 = 0        ; disable full-precision coordinate trajectory (.trr)
-nstvout                 = 0        ; disable velocity trajectory output (.trr)
-nstfout                 = 0        ; disable force trajectory output (.trr)
-nstxout-compressed      = 5000     ; save compressed coordinates to .xtc every 10 ps
-nstcalcenergy 		= 100
-nstenergy               = 100       ; save energies every 0.2 ps (100 steps)
-nstlog                  = 5000       ; update log file every 2 ps (1000 steps)
+nstxout                 = 0          ; disable full-precision coordinate trajectory (.trr)
+nstvout                 = 0          ; disable velocity trajectory output (.trr)
+nstfout                 = 0          ; disable force trajectory output (.trr)
+nstxout-compressed      = 300        ; save compressed coordinates to .xtc
+nstenergy               = 300        ; save coordinates every 1 ps (500 steps)
+nstlog                  = 300        ; save coordinates every 1 ps (500 steps)
 ; Bond parameters
 continuation            = no        ; Restarting after NVT 
 constraint_algorithm    = lincs     ; holonomic constraints 
@@ -31,12 +29,17 @@ DispCorr                = EnerPres  ; account for cut-off vdW scheme
 coulombtype             = PME       ; Particle Mesh Ewald for long-range electrostatics
 rcoulomb                = 1.1       ; short-range electrostatic cutoff (in nm)
 ; Temperature coupling is on
-tcoupl                  = nose-hoover               ; Nose-Hoover termostat
-tc-grps                 = System     ; two coupling groups - more accurate
-tau_t                   = 1     ; time constant, in ps
-ref_t                   = 298      ; reference temperature, one for each group, in K
+tcoupl                  = V-rescale                   ; modified Berendsen thermostat
+tc-grps                 = System       ; two coupling groups - more accurate
+tau_t                   = 0.1      ; time constant, in ps
+ref_t                   = 10  ; reference temperature, one for each group, in K
 ; Pressure coupling is on
-pcoupl                  = no        ; no pressure coupling in NVT
+pcoupl                  = Parrinello-Rahman    ; Pressure coupling on in NPT
+pcoupltype              = isotropic            ; uniform scaling of box vectors
+tau_p                   = 1.0                  ; time constant, in ps
+ref_p                   = 5.0 
+compressibility         = 4.5e-5 
+refcoord_scaling        = com
 ; Periodic boundary conditions
 pbc                     = xyz       ; 3-D PBC
 ; Velocity generation
