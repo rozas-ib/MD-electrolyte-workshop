@@ -525,11 +525,11 @@ gmx energy -f npt_eq.edr -o density_eq.xvg -b 100
 
 GROMACS prints the average density and fluctuations in the terminal.
 
-### Compare the equilibrated density with literature
+### Compare the equilibrated density with the experimental reference
 
-Compare the equilibrated density with reported values for related LiFSI/DME electrolytes. One useful reference is:
+Compare the equilibrated simulation density with the experimental value reported for **1 M LiFSI/DME**. Yu *et al.* report a density of **0.966 g mL⁻¹** in Supplementary Figure 1. This value can be used as the experimental reference when evaluating the equilibrated MD density.
 
-> Younesi, R. and Bardé, F., “Electrochemical performance and interfacial properties of Li-metal in lithium bis(fluorosulfonyl)imide based electrolytes,” *Scientific Reports* **7**, 15925 (2017). <https://doi.org/10.1038/s41598-017-16268-7>
+> Yu, Z., Wang, H., Kong, X. *et al.* “Molecular design for electrolyte solvents enabling energy-dense and long-cycling lithium metal batteries.” *Nature Energy* **5**, 526–533 (2020). <https://doi.org/10.1038/s41560-020-0634-5>
 
 ## 9. NVT production simulation
 
